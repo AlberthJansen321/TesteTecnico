@@ -21,6 +21,12 @@ public class ProdutoRepository : IProdutoRepository
 
         return await query.FirstOrDefaultAsync(x => x.Id == IdProduto);
     }
+    public async Task<Produto?> GetByNomeProduto(string Nome)
+    {
+        IQueryable<Produto> query = _context.Produtos;
+
+        return await query.FirstOrDefaultAsync(x => x.Nome.TrimEnd().TrimStart() == Nome.TrimEnd().TrimStart());
+    }
 }
 
 

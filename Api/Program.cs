@@ -14,6 +14,7 @@ builder.Services.AddScoped<IProdutoApplication, ProdutoApplication>();
 #endregion
 #region Repository
 builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
+builder.Services.AddScoped<IGeneralRepository, GeneralRepository>();
 #endregion
 
 

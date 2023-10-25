@@ -44,12 +44,28 @@ public class ProdutoApplication : IProdutoApplication
             throw new Exception(ex.Message);
         }
     }
+    public async Task<ProdutoDTO?> GetByNomeProduto(string Nome)
+    {
+        try
+        {
+            var produto = await _produtoRepository.GetByNomeProduto(Nome);
+
+            if (produto == null) return null;
+
+            return _mapper.Map<ProdutoDTO>(produto);
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message);
+        }
+    }
     public async Task<ProdutoDTO?> Add(ProdutoDTO model)
     {
         try
         {
             var produto = _mapper.Map<Produto>(model);
-
+            produto.DtCadastro = DateTime.UtcNow;
+            produto.DtAlteracao = null;
             _generarepository.Add(produto);
 
             if (await _generarepository.SaveChangesAsync())
