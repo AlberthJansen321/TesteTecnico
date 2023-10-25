@@ -8,6 +8,14 @@ builder.Services.AddDbContext<ApiContext>(
 
 
 // Add services to the container.
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+#region Application
+builder.Services.AddScoped<IProdutoApplication, ProdutoApplication>();
+#endregion
+#region Repository
+builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
+#endregion
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
