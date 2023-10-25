@@ -26,17 +26,21 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+app.UseForwardedHeaders(new ForwardedHeadersOptions 
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+    ForwardedHeaders = Microsoft.AspNetCore.HttpOverrides.ForwardedHeaders.XForwardedFor | 
+    Microsoft.AspNetCore.HttpOverrides.ForwardedHeaders.XForwardedProto 
+});
 
-app.UseHttpsRedirection();
+// Configure the HTTP request pipeline.
 
+app.UseSwagger();
+app.UseSwaggerUI();
+
+
+app.UseStatusCodePages();
+app.UseAuthentication();
+app.UseRouting();
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();

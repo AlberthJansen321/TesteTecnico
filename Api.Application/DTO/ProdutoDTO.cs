@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Api.Application.DTO;
 
@@ -10,6 +11,7 @@ public class ProdutoDTO
     public string Nome { get; set; }
     public string? Descricao { get; set; }
     [Required(ErrorMessage = "Informe o valor do produto")]
+    [Range(1,99999999999999999,ErrorMessage ="Valor do produto deve ver ser maior que 0")]
     public decimal Preco { get; set; }
 }
 
