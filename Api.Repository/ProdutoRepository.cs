@@ -1,6 +1,4 @@
-﻿using System.Security.Cryptography.X509Certificates;
-
-namespace Api.Repository;
+﻿namespace Api.Repository;
 public class ProdutoRepository : IProdutoRepository
 {
     private readonly ApiContext _context;
