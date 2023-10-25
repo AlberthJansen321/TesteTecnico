@@ -63,8 +63,13 @@ public class ProdutoApplication : IProdutoApplication
     {
         try
         {
+   
+            DateTime timeUtc = DateTime.UtcNow;
+            TimeZoneInfo kstZone = TimeZoneInfo.FindSystemTimeZoneById("E. South America Standard Time"); // Brasilia/BRA
+            DateTime dateTimeBrasilia = TimeZoneInfo.ConvertTimeFromUtc(timeUtc, kstZone);
+
             var produto = _mapper.Map<Produto>(model);
-            produto.DtCadastro = DateTime.UtcNow;
+            produto.DtCadastro = dateTimeBrasilia;
             produto.DtAlteracao = null;
             _generarepository.Add(produto);
 
@@ -104,18 +109,22 @@ public class ProdutoApplication : IProdutoApplication
     {
         try
         {
+            DateTime timeUtc = DateTime.UtcNow;
+            TimeZoneInfo kstZone = TimeZoneInfo.FindSystemTimeZoneById("E. South America Standard Time"); // Brasilia/BRA
+            DateTime dateTimeBrasilia = TimeZoneInfo.ConvertTimeFromUtc(timeUtc, kstZone);
+
             var produto = await _produtoRepository.GetByIdProduto(IdProduto);
 
             if (produto == null) return null;
 
             _mapper.Map(model, produto);
             produto.Id = IdProduto;
+            produto.DtAlteracao = dateTimeBrasilia;
             _generarepository.Update(produto);
 
             if (await _generarepository.SaveChangesAsync())
             {
                 var produto_retorno = await _produtoRepository.GetByIdProduto(IdProduto);
-
                 return _mapper.Map<ProdutoDTO>(produto_retorno);
             }
 

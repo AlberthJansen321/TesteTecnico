@@ -4,3 +4,7 @@ global using Api.Repository.Interfaces;
 global using Api.Repository;
 global using Api.Application;
 global using Api.Application.Interfaces;
+global using Api.Application.DTO;
+global using FluentValidation;
+global using FluentValidation.Results;
+global using Microsoft.AspNetCore.Mvc;

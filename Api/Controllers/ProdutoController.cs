@@ -1,22 +1,17 @@
-﻿using Api.Application.DTO;
-using Api.Domain.Models;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System.Data;
-
-namespace Api.Controllers
+﻿namespace Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class ProdutoController : ControllerBase
-    {   private readonly IProdutoApplication _Application;
-        public ProdutoController(IProdutoApplication application ) => _Application = application;
+    {   private readonly IProdutoApplication _application;
+        public ProdutoController(IProdutoApplication application) => _application = application;
+        
         [HttpGet("todos")]
         public async Task<ActionResult> Get()
         {
             try
             {
-                var produtos = await _Application.GetAllProdutosAsync();
+                var produtos = await _application.GetAllProdutosAsync();
 
                 if (produtos?.Count() <= 0)
                     return NoContent();
@@ -33,7 +28,7 @@ namespace Api.Controllers
         {
             try
             {
-                var produto = await _Application.GetByIdProduto(IdProduto);
+                var produto = await _application.GetByIdProduto(IdProduto);
 
                 if (produto != null)
                     return Ok(produto);
@@ -49,16 +44,16 @@ namespace Api.Controllers
         public async Task<ActionResult> Post(ProdutoDTO model)
         {
             try
-            {
-                var produto = await _Application.GetByNomeProduto(model.Nome);
-                if (produto != null) return BadRequest("Já existe um produto com esse mesmo nome");
-                       
-                var newproduto = await _Application.Add(model);
+            {  
+                    var produto = await _application.GetByNomeProduto(model.Nome);
+                    if (produto != null) return BadRequest("Já existe um produto com esse mesmo nome");
 
-                if (newproduto != null)
-                    return Ok(newproduto);
-                else
-                    return BadRequest("Erro ao cadastrar o produto");
+                    var newproduto = await _application.Add(model);
+
+                    if (newproduto != null)
+                        return Ok(newproduto);
+                    else
+                        return BadRequest("Erro ao cadastrar o produto");
             }
             catch (Exception ex)
             {
@@ -70,10 +65,11 @@ namespace Api.Controllers
         {
             try
             {
-                var produto = await _Application.GetByIdProduto(IdProduto);
+                
+                var produto = await _application.GetByIdProduto(IdProduto);
                 if (produto == null) return BadRequest("Produto Inválido");
 
-                var result = await _Application.Update(model, IdProduto);
+                var result = await _application.Update(model, IdProduto);
                 if (result == null) return BadRequest("Erro ao alterar o produto");
 
                 return Ok(produto);
@@ -88,10 +84,10 @@ namespace Api.Controllers
         {
             try
             {
-                var produto = await _Application.GetByIdProduto(IdProduto);
+                var produto = await _application.GetByIdProduto(IdProduto);
                 if (produto == null) return BadRequest("Produto Inválido");
 
-                return await _Application.Delete(IdProduto) ? Ok("Deletado") :
+                return await _application.Delete(IdProduto) ? Ok("Deletado") :
                 BadRequest("Ocorreu um problema não especifico ao tentar deletar o produto");
             }
             catch (Exception ex)
