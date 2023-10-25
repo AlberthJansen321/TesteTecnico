@@ -1,5 +1,12 @@
 var builder = WebApplication.CreateBuilder(args);
 
+
+#region Banco de dados
+builder.Services.AddDbContext<ApiContext>(
+    context => context.UseSqlServer( builder.Configuration.GetConnectionString("Default")));
+#endregion
+
+
 // Add services to the container.
 
 builder.Services.AddControllers();
