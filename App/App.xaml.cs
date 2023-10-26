@@ -2,6 +2,8 @@
 {
     public partial class App : Application
     {
+        public const string url_base = "http://179.108.74.86:8182";
+        public static bool updateview = false;
         public App()
         {
             InitializeComponent();
