@@ -1,10 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace Api.Application.DTO;
+﻿namespace Api.Application.DTO;
 
 public class ProdutoDTO 
 {
+    public int Id { get; set; }
     [Required(ErrorMessage = "Campo nome é obrigatório")]
     [MaxLength(255,ErrorMessage = "Deve conter no máximo 255 caracteres")]
     [MinLength(2,ErrorMessage = "Deve conter no mínimo 2 caracteres")]

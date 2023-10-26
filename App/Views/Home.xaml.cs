@@ -1,6 +1,6 @@
 namespace App.Views;
 
-public partial class Home : ContentView
+public partial class Home : ContentPage
 {
 	public Home()
 	{
