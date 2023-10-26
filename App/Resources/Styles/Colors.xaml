@@ -3,8 +3,8 @@
 <ResourceDictionary 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
-    
-    <Color x:Key="Primary">#eade72</Color>
+
+    <Color x:Key="Primary">red</Color>
     <Color x:Key="PrimaryDark">#FFC107</Color>
     <Color x:Key="Accent">#00BCD4</Color>
 

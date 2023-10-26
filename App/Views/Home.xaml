@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:model="clr-namespace:App.ViewModels"
+             xmlns:model="clr-namespace:App.Models"
              xmlns:viewmodel="clr-namespace:App.ViewModels"
              x:Class="App.Views.Home">
-    
+
     <ContentPage.Resources>
 
         <ContentView x:Key="BasicEmptyView">
@@ -36,40 +36,41 @@
 
     </ContentPage.Resources>
 
-    <AbsoluteLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+    <Grid>
 
-        <Grid AbsoluteLayout.LayoutBounds="0,0,1,1" BackgroundColor="Black" AbsoluteLayout.LayoutFlags="All">
+        <RefreshView x:DataType="viewmodel:HomeViewModel" IsRefreshing="{Binding IsBusy}" BackgroundColor="Green" 
+                         RefreshColor="White" Command="{Binding GetProdutosCommand}">
 
-        <CollectionView
-        x:Name="collectionview"
-        HorizontalScrollBarVisibility="Never"
-        VerticalScrollBarVisibility="Never"
-        ItemsSource="{Binding Produtos}"
-        BackgroundColor="Black"         
-        SelectionMode="Single"
-        Scrolled="collectionview_Scrolled">
+            <CollectionView
+                 x:Name="collectionview"
+                 HorizontalScrollBarVisibility="Never"
+                 VerticalScrollBarVisibility="Never"
+                 ItemsSource="{Binding Produtos}"
+                 BackgroundColor="Green"         
+                 SelectionMode="Single"
+                 Scrolled="collectionview_Scrolled">
 
                 <CollectionView.ItemTemplate>
 
                     <DataTemplate>
 
-                        <SwipeView  Padding ="0,10,0,0" HeightRequest="140" SwipeStarted="SwipeView_SwipeStarted" SwipeEnded="SwipeView_SwipeEnded">
+                        <SwipeView  Padding ="0,10,0,0" HeightRequest="100" SwipeStarted="SwipeView_SwipeStarted" SwipeEnded="SwipeView_SwipeEnded">
 
                             <SwipeView.LeftItems>
 
                                 <SwipeItems  SwipeBehaviorOnInvoked="Close" Mode="Reveal">
 
                                     <SwipeItem 
-                                        IsDestructive="True"
+                                        IsDestructive="True"                            
                                         IconImageSource="delete.png"
-                                        BackgroundColor="Black"             
+                                        BackgroundColor="Transparent"             
                                         Command="{Binding Source={x:Reference collectionview}, Path=BindingContext.DeleteProdutoCommand}"
                                         CommandParameter="{Binding .}"/>
 
                                     <SwipeItem 
                                         IsDestructive="True"
                                         IconImageSource="edit.png"
-                                        BackgroundColor="Black"   
+                                        BackgroundColor="Transparent"   
                                         Command="{Binding Source={x:Reference collectionview}, Path=BindingContext.SelectionProdutoCommand}"
                                         CommandParameter="{Binding .}"/>
                                 </SwipeItems>
@@ -78,11 +79,11 @@
 
                             <!-- Content -->
                             <Border Style="{StaticResource CardViewBorder}">
-                                <StackLayout Orientation="Horizontal">
- 
-                                    <StackLayout  Orientation="Vertical" HorizontalOptions="Center" VerticalOptions="Center" Margin="5" Spacing="5">
-                                        <Label Style="{StaticResource SmallLabel}" TextColor="White" Text="{Binding Nome,Mode=OneTime,StringFormat='Nome: {0}'}" />
-                                        <Label Style="{StaticResource SmallLabel}" TextColor="White" Text="{Binding Preco,Mode=OneTime,StringFormat='Preço: R$ {0}'}"/>
+                                <StackLayout Orientation="Horizontal" Padding="10">
+
+                                    <StackLayout x:DataType="model:Produto"  Orientation="Vertical" HorizontalOptions="Center" VerticalOptions="Center" Margin="5" Spacing="5">
+                                        <Label Style="{StaticResource MediumLabel}" TextColor="Black" Text="{Binding Nome,Mode=OneTime,StringFormat='Nome: {0}'}" />
+                                        <Label Style="{StaticResource MediumLabel}" TextColor="Black" Text="{Binding Preco,Mode=OneTime,StringFormat='Preço: R$ {0}'}"/>
                                     </StackLayout>
 
                                 </StackLayout>
@@ -91,24 +92,12 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-         </Grid>
-            
-            <!--Indicador de atividade-->
-        <AbsoluteLayout
-                    x:Name="layoutindicator"
-                    BackgroundColor="Black"
-                    AbsoluteLayout.LayoutBounds="0.5,0.5,1,1"
-                    AbsoluteLayout.LayoutFlags="All"
-                    IsVisible="{Binding IsBusy}"
-                    Opacity="0.9">
-            <ActivityIndicator Color="#eade72"
-                           x:Name="indicator"
-                           AbsoluteLayout.LayoutBounds="0.5,0.5,0.3,0.1"
-                           AbsoluteLayout.LayoutFlags="All"
-                           IsVisible="{Binding IsBusy}"
-                           IsRunning="{Binding IsBusy}"/>
+        </RefreshView>
+        <AbsoluteLayout>
+            <ImageButton Source="add.png" 
+            BackgroundColor="Transparent"
+            AbsoluteLayout.LayoutFlags="PositionProportional"  
+            AbsoluteLayout.LayoutBounds=".95,.95,80,80" />
         </AbsoluteLayout>
-        <!--fim do indicador-->
-
-    </AbsoluteLayout>
+    </Grid>
 </ContentPage>

@@ -11,6 +11,7 @@ namespace App.ViewModels
         private readonly IConnectivity _connectivity;
         public RelayCommand<Produto> SelectionProdutoCommand { get; private set; }
         public RelayCommand<Produto> DeleteProdutoCommand { get; private set; }
+          public RelayCommand<Produto> GetProdutosCommand { get; private set; }
         public ObservableCollection<Produto> Produtos { get; } = new();
 
         public HomeViewModel(IHomeService homeService, IConnectivity connectivity)
@@ -21,19 +22,16 @@ namespace App.ViewModels
             {
                 await GetProdutos();
             });
-            SelectionProdutoCommand = new RelayCommand<Produto>(async (param) => SelectProduto(param));
-            DeleteProdutoCommand = new RelayCommand<Produto>(async (param) => DeleteProduto(param));
+            SelectionProdutoCommand = new RelayCommand<Produto>(async (param) => await SelectProduto(param));
+            DeleteProdutoCommand = new RelayCommand<Produto>(async (param) => await DeleteProduto(param));
+            GetProdutosCommand = new RelayCommand<Produto>(async (param) => await GetProdutos());
         }
-
         public async Task GetProdutos()
         {
             await App.Current.Dispatcher.DispatchAsync(async () =>
             {
                 try
                 {
-                    if (IsBusy)
-                        return;
-
                     if (_connectivity.NetworkAccess != NetworkAccess.Internet)
                     {
                         await Shell.Current.DisplayAlert("Atenção", "Verifique sua conexão com a internet", "Ok");
@@ -77,7 +75,7 @@ namespace App.ViewModels
                 }
                 catch (Exception ex)
                 {
-                    await Shell.Current.DisplayAlert("Error!", ex.Message, "OK");
+                    await Shell.Current.DisplayAlert("Error!", $"Não possível retornar os produtos. Erro: {ex.Message}", "OK");
                 }
                 finally
                 {
@@ -86,11 +84,11 @@ namespace App.ViewModels
             });
         }
 
-        private async void SelectProduto(Produto param)
+        private async Task SelectProduto(Produto param)
         {
             try
             {
-
+                await Shell.Current.DisplayAlert("Error!", "Selecionou o produto", "OK");
             }
             catch
             {
@@ -98,12 +96,24 @@ namespace App.ViewModels
             }
         }
 
-        private void DeleteProduto(Produto param)
+        private async Task DeleteProduto(Produto param)
         {
 
             try
             {
+                if (_connectivity.NetworkAccess != NetworkAccess.Internet)
+                {
+                    await Shell.Current.DisplayAlert("Atenção", "Verifique sua conexão com a internet", "Ok");
+                    return;
+                }
 
+                bool delete = await _homeService.Delete(param.Id);
+
+                if(delete == true)
+                {
+                    await Shell.Current.DisplayAlert("Sucesso", "Produto deletado", "Ok");
+                    await GetProdutos();
+                }
             }
             catch
             {
