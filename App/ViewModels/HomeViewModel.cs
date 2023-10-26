@@ -46,7 +46,7 @@ namespace App.ViewModels
                     {
                         var produtos = await _homeService.GetAllProdutosAsync();
 
-                        await Application.Current.Dispatcher.DispatchAsync(async () =>
+                        await Application.Current.Dispatcher.DispatchAsync(() =>
                         {
                             if (Produtos.Count != 0)
                             {
@@ -55,7 +55,7 @@ namespace App.ViewModels
 
                             if (produtos?.Count() > 0)
                             {
-                                foreach (var dados in produtos.OrderBy(x => x.Id))
+                                foreach (var dados in produtos)
                                 {
                                     var produto = new Produto();
                                     produto.Nome = dados.Nome;

@@ -1,8 +1,6 @@
 ﻿using App.Service;
 using App.Service.Interfaces;
 using Microsoft.Extensions.Logging;
-using static Android.Service.Notification.NotificationListenerService;
-using System.Runtime.CompilerServices;
 using App.Views;
 using App.ViewModels;
 

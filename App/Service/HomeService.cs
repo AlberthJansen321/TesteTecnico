@@ -1,6 +1,5 @@
 ﻿using App.Models;
 using App.Service.Interfaces;
-using static Android.Graphics.ColorSpace;
 using System.Net.Http.Headers;
 using System.Net;
 using Newtonsoft.Json;

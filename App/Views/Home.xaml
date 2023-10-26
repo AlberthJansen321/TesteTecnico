@@ -38,10 +38,9 @@
 
     <AbsoluteLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
 
-        <VerticalStackLayout AbsoluteLayout.LayoutBounds="0,0,1,1" BackgroundColor="Black" AbsoluteLayout.LayoutFlags="All">
+        <Grid AbsoluteLayout.LayoutBounds="0,0,1,1" BackgroundColor="Black" AbsoluteLayout.LayoutFlags="All">
 
         <CollectionView
-        Grid.Row="0"
         x:Name="collectionview"
         HorizontalScrollBarVisibility="Never"
         VerticalScrollBarVisibility="Never"
@@ -83,7 +82,7 @@
  
                                     <StackLayout  Orientation="Vertical" HorizontalOptions="Center" VerticalOptions="Center" Margin="5" Spacing="5">
                                         <Label Style="{StaticResource SmallLabel}" TextColor="White" Text="{Binding Nome,Mode=OneTime,StringFormat='Nome: {0}'}" />
-                                        <Label Style="{StaticResource SmallLabel}" TextColor="White" Text="{Binding Preco,Mode=OneTime,StringFormat='Preço: {0}'}"/>
+                                        <Label Style="{StaticResource SmallLabel}" TextColor="White" Text="{Binding Preco,Mode=OneTime,StringFormat='Preço: R$ {0}'}"/>
                                     </StackLayout>
 
                                 </StackLayout>
@@ -92,7 +91,7 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-         </VerticalStackLayout>
+         </Grid>
             
             <!--Indicador de atividade-->
         <AbsoluteLayout
