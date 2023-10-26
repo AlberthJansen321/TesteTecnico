@@ -5,13 +5,13 @@ VisualStudioVersion = 17.5.33530.505
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api", "Api\Api.csproj", "{89C39684-8933-4803-B2F6-DF47A8B974B9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.Application", "Api.Application\Api.Application.csproj", "{3E0BFE73-E264-402B-A1CC-97222087BECB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api.Application", "Api.Application\Api.Application.csproj", "{3E0BFE73-E264-402B-A1CC-97222087BECB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.Domain", "Api.Domain\Api.Domain.csproj", "{0CA0F4D0-6CC7-40AD-B9F1-4EE6E273067B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api.Domain", "Api.Domain\Api.Domain.csproj", "{0CA0F4D0-6CC7-40AD-B9F1-4EE6E273067B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.Repository", "Api.Repository\Api.Repository.csproj", "{7BAE4E4C-8C51-4228-B47B-CC486E9C9FA0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api.Repository", "Api.Repository\Api.Repository.csproj", "{7BAE4E4C-8C51-4228-B47B-CC486E9C9FA0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App", "App\App.csproj", "{AD1B938A-C32B-44ED-8ED8-69F7D56F1D88}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App", "App\App.csproj", "{AD1B938A-C32B-44ED-8ED8-69F7D56F1D88}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

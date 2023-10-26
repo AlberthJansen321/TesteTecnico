@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:App.ViewModels"
+             xmlns:viewmodel="clr-namespace:App.ViewModels"
              x:Class="App.Views.Home">
     
     <ContentPage.Resources>
@@ -43,7 +45,7 @@
         x:Name="collectionview"
         HorizontalScrollBarVisibility="Never"
         VerticalScrollBarVisibility="Never"
-        ItemsSource="{Binding }"
+        ItemsSource="{Binding Produtos}"
         BackgroundColor="Black"         
         SelectionMode="Single"
         Scrolled="collectionview_Scrolled">
@@ -62,14 +64,14 @@
                                         IsDestructive="True"
                                         IconImageSource="delete.png"
                                         BackgroundColor="Black"             
-                                        Command="{Binding Source={x:Reference collectionview}, Path=BindingContext.DeleteCommand}"
+                                        Command="{Binding Source={x:Reference collectionview}, Path=BindingContext.DeleteProdutoCommand}"
                                         CommandParameter="{Binding .}"/>
 
                                     <SwipeItem 
                                         IsDestructive="True"
                                         IconImageSource="edit.png"
                                         BackgroundColor="Black"   
-                                        Command="{Binding Source={x:Reference collectionview}, Path=BindingContext.SelectionCommand}"
+                                        Command="{Binding Source={x:Reference collectionview}, Path=BindingContext.SelectionProdutoCommand}"
                                         CommandParameter="{Binding .}"/>
                                 </SwipeItems>
 
@@ -98,14 +100,14 @@
                     BackgroundColor="Black"
                     AbsoluteLayout.LayoutBounds="0.5,0.5,1,1"
                     AbsoluteLayout.LayoutFlags="All"
-                    IsVisible="{Binding }"
+                    IsVisible="{Binding IsBusy}"
                     Opacity="0.9">
             <ActivityIndicator Color="#eade72"
                            x:Name="indicator"
                            AbsoluteLayout.LayoutBounds="0.5,0.5,0.3,0.1"
                            AbsoluteLayout.LayoutFlags="All"
-                           IsVisible="{Binding }"
-                           IsRunning="{Binding }"/>
+                           IsVisible="{Binding IsBusy}"
+                           IsRunning="{Binding IsBusy}"/>
         </AbsoluteLayout>
         <!--fim do indicador-->
 

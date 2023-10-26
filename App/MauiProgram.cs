@@ -1,4 +1,10 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using App.Service;
+using App.Service.Interfaces;
+using Microsoft.Extensions.Logging;
+using static Android.Service.Notification.NotificationListenerService;
+using System.Runtime.CompilerServices;
+using App.Views;
+using App.ViewModels;
 
 namespace App
 {
@@ -14,9 +20,16 @@ namespace App
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
-
+            //Conectivy
+            builder.Services.AddSingleton(Connectivity.Current);
+            //Services 
+            builder.Services.AddHttpClient<IHomeService, HomeService>().SetHandlerLifetime(TimeSpan.FromMinutes(5));
+            //Views
+            builder.Services.AddSingleton<Home>();
+            //ViewModels
+            builder.Services.AddSingleton<HomeViewModel>();
 #if DEBUG
-		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
 
             return builder.Build();
