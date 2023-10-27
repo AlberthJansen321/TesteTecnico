@@ -23,8 +23,8 @@
 
             <Label Text="Preço" Style="{StaticResource MediumLabel}" TextColor="{StaticResource Primary}" FontAttributes="Bold"></Label>
             <Border  Style="{StaticResource CardViewBorder}">
-                <Entry x:Name="Valor" PlaceholderColor="Gray" Placeholder="Preço do produto"  Style="{StaticResource EntryStyle}" Text="{Binding Produto.Preco,StringFormat='{0} R$'}" TextColor="Black" 
-                          BackgroundColor="{StaticResource Primary}" FontAttributes="Bold" Keyboard="Numeric"/>
+                <Entry x:Name="Valor" PlaceholderColor="Gray" Placeholder="Preço do produto"  Style="{StaticResource EntryStyle}" Text="{Binding Produto.Preco,StringFormat='{0} R$'}" 
+                       TextColor="Black" BackgroundColor="{StaticResource Primary}" FontAttributes="Bold" Keyboard="Numeric"/>
             </Border>
 
             <Button VerticalOptions="EndAndExpand" HorizontalOptions="Center"

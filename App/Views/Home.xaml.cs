@@ -69,4 +69,9 @@ public partial class Home : ContentPage
         var swipView = (SwipeView)sender;
         swipeViews.Add(swipView);
     }
+
+    private async void ImageButton_Clicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync($"/{nameof(Add)}");
+    }
 }

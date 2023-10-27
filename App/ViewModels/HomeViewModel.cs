@@ -43,7 +43,7 @@ namespace App.ViewModels
                     await Shell.Current.DisplayAlert("Atenção", "Verifique sua conexão com a internet", "Ok");
                     return;
                 }
-
+               
                 var result =  await _homeService.Update(Produto.Id,Produto);
 
                 if (result != null)
@@ -138,7 +138,7 @@ namespace App.ViewModels
         private async Task DeleteProduto(Produto param)
         {
             try
-            {
+            { 
                 if (_connectivity.NetworkAccess != NetworkAccess.Internet)
                 {
                     await Shell.Current.DisplayAlert("Atenção", "Verifique sua conexão com a internet", "Ok");
@@ -158,6 +158,5 @@ namespace App.ViewModels
 
             }
         }
-
     }
 }

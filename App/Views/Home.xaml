@@ -95,6 +95,7 @@
         </RefreshView>
         <AbsoluteLayout>
             <ImageButton Source="add.png" 
+                         Clicked="ImageButton_Clicked"
             BackgroundColor="Transparent"
             AbsoluteLayout.LayoutFlags="PositionProportional"  
             AbsoluteLayout.LayoutBounds=".95,.95,80,80" />
