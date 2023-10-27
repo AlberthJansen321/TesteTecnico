@@ -29,7 +29,7 @@
             <Button VerticalOptions="EndAndExpand" HorizontalOptions="Center"
                            Text="Salvar"
                            HeightRequest="50"
-                           Command="{Binding UpdateProdutocommand}"
+                           Command="{Binding AddProdutocommand}"
                            WidthRequest="200"
                            TextColor="Black" Style="{StaticResource MediumLabel}"
                            BackgroundColor="White" BorderWidth="2" BorderColor="{StaticResource Primary}"  >

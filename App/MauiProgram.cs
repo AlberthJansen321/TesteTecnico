@@ -24,6 +24,7 @@ namespace App
             builder.Services.AddHttpClient<IHomeService, HomeService>().SetHandlerLifetime(TimeSpan.FromMinutes(5));
             //Views
             builder.Services.AddSingleton<Home>();
+            builder.Services.AddSingleton<Add>();
             builder.Services.AddSingleton<Update>();
             //ViewModels
             builder.Services.AddSingleton<HomeViewModel>();

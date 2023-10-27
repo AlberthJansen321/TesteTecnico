@@ -18,6 +18,7 @@ namespace App.ViewModels
         public RelayCommand<Produto> DeleteProdutoCommand { get; private set; }
         public RelayCommand<Produto> GetProdutosCommand { get; private set; }
         public RelayCommand<Produto> UpdateProdutocommand { get; private set; }
+        public RelayCommand<Produto> AddProdutocommand { get; private set; }
         public ObservableCollection<Produto> Produtos { get; } = new();
  
         public HomeViewModel(IHomeService homeService, IConnectivity connectivity)
@@ -32,8 +33,34 @@ namespace App.ViewModels
             DeleteProdutoCommand = new RelayCommand<Produto>(async (param) => await DeleteProduto(param));
             GetProdutosCommand = new RelayCommand<Produto>(async (param) => await GetProdutos());
             UpdateProdutocommand = new RelayCommand<Produto>(async (param) => await UpdateProduto());
+            AddProdutocommand = new RelayCommand<Produto>(async (param) => await AddProduto());
         }
+        private async Task AddProduto()
+        {
+            try
+            {
+                if (_connectivity.NetworkAccess != NetworkAccess.Internet)
+                {
+                    await Shell.Current.DisplayAlert("Atenção", "Verifique sua conexão com a internet", "Ok");
+                    return;
+                }
 
+                var result = await _homeService.Add(Produto);
+
+                if (result != null)
+                    await Shell.Current.DisplayAlert("Sucesso", "Produto cadastrado com sucesso", "OK");
+                else
+                    await Shell.Current.DisplayAlert("Sucesso", "Erro ao cadastrar o produto", "OK");
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+                await GetProdutos();
+            }
+        }
         private async Task UpdateProduto()
         {
             try
