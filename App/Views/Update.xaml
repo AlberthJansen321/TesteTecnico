@@ -2,11 +2,39 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="App.Views.Update"
-             Title="Update">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             xmlns:model="clr-namespace:App.Models"
+             xmlns:viewmodel="clr-namespace:App.ViewModels"
+             Title="Update" Background="green">
+
+    <ScrollView>
+        <VerticalStackLayout Background="green" x:DataType="viewmodel:HomeViewModel" Spacing="10" Padding="20">
+
+            <Label Text="Nome" Style="{StaticResource MediumLabel}" TextColor="{StaticResource Primary}" FontAttributes="Bold"></Label>
+            <Border Style="{StaticResource CardViewBorder}" >
+                <Entry Text="{Binding Produto.Nome}" Style="{StaticResource EntryStyle}"
+                              PlaceholderColor="Gray" FontAttributes="Bold" Placeholder="Nome do Produto" ClearButtonVisibility="WhileEditing"/>
+            </Border>
+
+            <Label Text="Descrição" Style="{StaticResource MediumLabel}" TextColor="{StaticResource Primary}" FontAttributes="Bold"></Label>
+            <Border Style="{StaticResource CardViewBorder}" >
+                <Entry Text="{Binding Produto.Descricao}" Style="{StaticResource EntryStyle}"
+                               PlaceholderColor="Gray" FontAttributes="Bold" Placeholder="Descrição do produto" ClearButtonVisibility="WhileEditing"/>
+            </Border>
+
+            <Label Text="Preço" Style="{StaticResource MediumLabel}" TextColor="{StaticResource Primary}" FontAttributes="Bold"></Label>
+            <Border  Style="{StaticResource CardViewBorder}">
+                <Entry x:Name="Valor" PlaceholderColor="Gray" Placeholder="Preço do produto"  Style="{StaticResource EntryStyle}" Text="{Binding Produto.Preco,StringFormat='{0} R$'}" TextColor="Black" 
+                          BackgroundColor="{StaticResource Primary}" FontAttributes="Bold" Keyboard="Numeric"/>
+            </Border>
+
+            <Button VerticalOptions="EndAndExpand" HorizontalOptions="Center"
+                           Text="Salvar"
+                           HeightRequest="50"
+                           Command="{Binding UpdateProdutocommand}"
+                           WidthRequest="200"
+                           TextColor="Black" Style="{StaticResource MediumLabel}"
+                           BackgroundColor="White" BorderWidth="2" BorderColor="{StaticResource Primary}"  >
+            </Button>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

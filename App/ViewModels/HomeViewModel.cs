@@ -1,5 +1,7 @@
 ﻿using App.Models;
 using App.Service.Interfaces;
+using App.Views;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 
@@ -7,13 +9,17 @@ namespace App.ViewModels
 {
     public partial class HomeViewModel : BaseViewModel
     {
+        [ObservableProperty]
+        public Produto produto = new Produto();
+
         private readonly IHomeService _homeService;
         private readonly IConnectivity _connectivity;
         public RelayCommand<Produto> SelectionProdutoCommand { get; private set; }
         public RelayCommand<Produto> DeleteProdutoCommand { get; private set; }
-          public RelayCommand<Produto> GetProdutosCommand { get; private set; }
+        public RelayCommand<Produto> GetProdutosCommand { get; private set; }
+        public RelayCommand<Produto> UpdateProdutocommand { get; private set; }
         public ObservableCollection<Produto> Produtos { get; } = new();
-
+ 
         public HomeViewModel(IHomeService homeService, IConnectivity connectivity)
         {
             _homeService = homeService;
@@ -25,7 +31,36 @@ namespace App.ViewModels
             SelectionProdutoCommand = new RelayCommand<Produto>(async (param) => await SelectProduto(param));
             DeleteProdutoCommand = new RelayCommand<Produto>(async (param) => await DeleteProduto(param));
             GetProdutosCommand = new RelayCommand<Produto>(async (param) => await GetProdutos());
+            UpdateProdutocommand = new RelayCommand<Produto>(async (param) => await UpdateProduto());
         }
+
+        private async Task UpdateProduto()
+        {
+            try
+            {
+                if (_connectivity.NetworkAccess != NetworkAccess.Internet)
+                {
+                    await Shell.Current.DisplayAlert("Atenção", "Verifique sua conexão com a internet", "Ok");
+                    return;
+                }
+
+                var result =  await _homeService.Update(Produto.Id,Produto);
+
+                if (result != null)
+                    await Shell.Current.DisplayAlert("Sucesso", "Produto alterado com sucesso", "OK");
+                else
+                    await Shell.Current.DisplayAlert("Sucesso", "Erro ao alterar o produto", "OK");
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+                await GetProdutos();
+            }
+        }
+
         public async Task GetProdutos()
         {
             await App.Current.Dispatcher.DispatchAsync(async () =>
@@ -88,7 +123,11 @@ namespace App.ViewModels
         {
             try
             {
-                await Shell.Current.DisplayAlert("Error!", "Selecionou o produto", "OK");
+                if (param != null)
+                {
+                    Produto = param;
+                    await Shell.Current.GoToAsync($"/{nameof(Update)}");
+                }
             }
             catch
             {
@@ -98,7 +137,6 @@ namespace App.ViewModels
 
         private async Task DeleteProduto(Produto param)
         {
-
             try
             {
                 if (_connectivity.NetworkAccess != NetworkAccess.Internet)
