@@ -37,24 +37,25 @@
     </ContentPage.Resources>
 
     <Grid>
-
-        <RefreshView x:DataType="viewmodel:HomeViewModel" IsRefreshing="{Binding IsBusy}" BackgroundColor="Green" 
-                         RefreshColor="White" Command="{Binding GetProdutosCommand}">
-
-            <CollectionView
+        
+            <CollectionView    
+                 RemainingItemsThreshold="1"                 
                  x:Name="collectionview"
-                 HorizontalScrollBarVisibility="Never"
-                 VerticalScrollBarVisibility="Never"
+                 RemainingItemsThresholdReachedCommand="{ Binding LoadMoreProdutosCommand}"
                  ItemsSource="{Binding Produtos}"
                  BackgroundColor="Green"         
                  SelectionMode="Single"
                  Scrolled="collectionview_Scrolled">
-
+            <CollectionView.Header>
+                <VerticalStackLayout>
+                    <ActivityIndicator IsRunning="True" IsVisible="{Binding IsBusy}" HeightRequest="40" WidthRequest="40" HorizontalOptions="Center"></ActivityIndicator>
+                </VerticalStackLayout>
+            </CollectionView.Header>
                 <CollectionView.ItemTemplate>
 
                     <DataTemplate>
 
-                        <SwipeView  Padding ="0,10,0,0" HeightRequest="100" SwipeStarted="SwipeView_SwipeStarted" SwipeEnded="SwipeView_SwipeEnded">
+                        <SwipeView  Padding ="0,6,0,0" HeightRequest="80" SwipeStarted="SwipeView_SwipeStarted" SwipeEnded="SwipeView_SwipeEnded">
 
                             <SwipeView.LeftItems>
 
@@ -81,7 +82,7 @@
                             <Border Style="{StaticResource CardViewBorder}">
                                 <StackLayout Orientation="Horizontal" Padding="10">
 
-                                    <StackLayout x:DataType="model:Produto"  Orientation="Vertical" HorizontalOptions="Center" VerticalOptions="Center" Margin="5" Spacing="5">
+                                    <StackLayout x:DataType="model:Produto"  Orientation="Vertical" HorizontalOptions="Center" VerticalOptions="Center" Margin="2" Spacing="2">
                                         <Label Style="{StaticResource MediumLabel}" TextColor="Black" Text="{Binding Nome,Mode=OneTime,StringFormat='Nome: {0}'}" />
                                         <Label Style="{StaticResource MediumLabel}" TextColor="Black" Text="{Binding Preco,Mode=OneTime,StringFormat='Preço: R$ {0}'}"/>
                                     </StackLayout>
@@ -91,8 +92,13 @@
                         </SwipeView>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
+                <CollectionView.Footer>
+                    <VerticalStackLayout>
+                        <ActivityIndicator IsRunning="True" IsVisible="{Binding IsLoading}" HeightRequest="40" WidthRequest="40" HorizontalOptions="Center"></ActivityIndicator>
+                    </VerticalStackLayout>
+                </CollectionView.Footer>
             </CollectionView>
-        </RefreshView>
+
         <AbsoluteLayout>
             <ImageButton Source="add.png" 
                          Clicked="ImageButton_Clicked"

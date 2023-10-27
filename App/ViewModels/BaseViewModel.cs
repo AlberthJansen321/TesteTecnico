@@ -7,6 +7,8 @@ namespace App.ViewModels
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(IsNotBusy))]
         bool isBusy;
+        [ObservableProperty]
+        bool isLoading;
 
         public bool IsNotBusy => !IsBusy;
     }

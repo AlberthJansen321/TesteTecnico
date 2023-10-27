@@ -10,19 +10,19 @@
 
             <Label Text="Nome" Style="{StaticResource MediumLabel}" TextColor="{StaticResource Primary}" FontAttributes="Bold"></Label>
             <Border Style="{StaticResource CardViewBorder}" >
-                <Entry Text="{Binding Produto.Nome}" Style="{StaticResource EntryStyle}"
+                <Entry Text="{Binding ModelProduto.Nome}" Style="{StaticResource EntryStyle}"
                               PlaceholderColor="Gray" FontAttributes="Bold" Placeholder="Nome do Produto" ClearButtonVisibility="WhileEditing"/>
             </Border>
 
             <Label Text="Descrição" Style="{StaticResource MediumLabel}" TextColor="{StaticResource Primary}" FontAttributes="Bold"></Label>
             <Border Style="{StaticResource CardViewBorder}" >
-                <Entry Text="{Binding Produto.Descricao}" Style="{StaticResource EntryStyle}"
+                <Entry Text="{Binding ModelProduto.Descricao}" Style="{StaticResource EntryStyle}"
                                PlaceholderColor="Gray" FontAttributes="Bold" Placeholder="Descrição do produto" ClearButtonVisibility="WhileEditing"/>
             </Border>
 
             <Label Text="Preço" Style="{StaticResource MediumLabel}" TextColor="{StaticResource Primary}" FontAttributes="Bold"></Label>
             <Border  Style="{StaticResource CardViewBorder}">
-                <Entry x:Name="Valor" PlaceholderColor="Gray" Placeholder="Preço do produto"  Style="{StaticResource EntryStyle}" Text="{Binding Produto.Preco,StringFormat='{0} R$'}" 
+                <Entry x:Name="Valor" PlaceholderColor="Gray" Placeholder="Preço do produto"  Style="{StaticResource EntryStyle}" Text="{Binding ModelProduto.Preco,StringFormat='{0} R$'}" 
                        TextColor="Black" BackgroundColor="{StaticResource Primary}" FontAttributes="Bold" Keyboard="Numeric"/>
             </Border>
 
