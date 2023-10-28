@@ -1,2 +1,2 @@
 # TesteTecnico
-Crud produto, consumindo uma api Restfull
+Crud produto com .Net Maui, consumindo uma api Restfull
